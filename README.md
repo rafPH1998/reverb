@@ -24,7 +24,7 @@ docker-compose exec app bash
 ```
 
 
-Instale as dependências do projeto
+Instale as dependência do projeto
 ```sh
 composer install
 ```
