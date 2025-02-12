@@ -29,22 +29,14 @@ class MessageTestNotification extends Notification implements ShouldBroadcast
         return ['broadcast'];
     }
 
-    /**
-     * Get the mail representation of the notification.
-     */
-  /*   public function toMail(object $notifiable): MailMessage
-    {
-        return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
-    } */
-
     public function toBroadcast(object $notifiable): BroadcastMessage
     {
         return new BroadcastMessage([
             'status' => $this->payload['status'],
-            'body' => $this->payload['body']
+            'body' => $this->payload['body'],
+            'timestamp' => $this->payload['timestamp'] ?? now()->toISOString(),
+            'type' => $this->payload['type'] ?? 'notification',
+            'user_id' => $notifiable->id
         ]);
     }
 
